@@ -48,7 +48,7 @@ function love.load()
     -- larger font for drawing the score on the screen
     scoreFont = love.graphics.newFont('font.ttf', 32)
 
-    -- set LÖVE2D's active font to the smallFont obect
+    -- set LÖVE2D's active font to the smallFont object
     love.graphics.setFont(smallFont)
 
     -- initialize window with virtual resolution
@@ -64,8 +64,10 @@ function love.load()
     player2Score = 0
 
     -- paddle positions on the Y axis (they can only move up or down)
-    player1Y = 30
-    player2Y = VIRTUAL_HEIGHT - 50
+    topLimit  = 30
+    bottomLimit = VIRTUAL_HEIGHT - 50 
+    player1Y = topLimit
+    player2Y = bottomLimit
 end
 
 --[[
@@ -74,19 +76,19 @@ end
 ]]
 function love.update(dt)
     -- player 1 movement
-    if love.keyboard.isDown('w') then
+    if love.keyboard.isDown('w') and (player1Y > topLimit) then
         -- add negative paddle speed to current Y scaled by deltaTime
         player1Y = player1Y + -PADDLE_SPEED * dt
-    elseif love.keyboard.isDown('s') then
+    elseif love.keyboard.isDown('s') and (player1Y < bottomLimit) then    
         -- add positive paddle speed to current Y scaled by deltaTime
         player1Y = player1Y + PADDLE_SPEED * dt
     end
 
     -- player 2 movement
-    if love.keyboard.isDown('up') then
+    if love.keyboard.isDown('up') and (player2Y > topLimit) then
         -- add negative paddle speed to current Y scaled by deltaTime
         player2Y = player2Y + -PADDLE_SPEED * dt
-    elseif love.keyboard.isDown('down') then
+    elseif love.keyboard.isDown('down') and (player2Y < bottomLimit) then
         -- add positive paddle speed to current Y scaled by deltaTime
         player2Y = player2Y + PADDLE_SPEED * dt
     end
@@ -114,11 +116,11 @@ function love.draw()
 
     -- clear the screen with a specific color; in this case, a color similar
     -- to some versions of the original Pong
-    love.graphics.clear(40, 45, 52, 255)
+    love.graphics.clear(40/255, 45/255, 52/255, 1)
 
     -- draw welcome text toward the top of the screen
     love.graphics.setFont(smallFont)
-    love.graphics.printf('Hello Pong!', 0, 20, VIRTUAL_WIDTH, 'center')
+    love.graphics.printf('Hello David\'s Pong!', 0, 20, VIRTUAL_WIDTH, 'center')
 
     -- draw score on the left and right center of the screen
     -- need to switch font to draw before actually printing

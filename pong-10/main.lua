@@ -42,11 +42,11 @@ require 'Paddle'
 -- but which will mechanically function very differently
 require 'Ball'
 
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 720
+WINDOW_WIDTH = 1120
+WINDOW_HEIGHT = 630
 
-VIRTUAL_WIDTH = 432
-VIRTUAL_HEIGHT = 243
+VIRTUAL_WIDTH = 352
+VIRTUAL_HEIGHT = 198
 
 -- speed at which we will move our paddle; multiplied by dt in update
 PADDLE_SPEED = 200
@@ -255,7 +255,7 @@ function love.draw()
 
     -- clear the screen with a specific color; in this case, a color similar
     -- to some versions of the original Pong
-    love.graphics.clear(40, 45, 52, 255)
+    love.graphics.clear(40/255, 45/255, 52/255, 1)
 
     love.graphics.setFont(smallFont)
 

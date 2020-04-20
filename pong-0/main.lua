@@ -38,8 +38,8 @@ end
     Called after update by LÖVE2D, used to draw anything to the screen, updated or otherwise.
 ]]
 function love.draw()
-    love.graphics.printf(
-        'Hello Pong!',          -- text to render
+    love.graphics.printf( 
+        'Hello Pong!Im Daniel and i will hack you',          -- text to render
         0,                      -- starting X (0 since we're going to center it based on width)
         WINDOW_HEIGHT / 2 - 6,  -- starting Y (halfway down the screen)
         WINDOW_WIDTH,           -- number of pixels to center within (the entire screen here)

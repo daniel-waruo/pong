@@ -42,14 +42,14 @@ require 'Paddle'
 -- but which will mechanically function very differently
 require 'Ball'
 
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 720
+WINDOW_WIDTH = 1200
+WINDOW_HEIGHT = 600
 
-VIRTUAL_WIDTH = 432
-VIRTUAL_HEIGHT = 243
+VIRTUAL_WIDTH = 450
+VIRTUAL_HEIGHT = 225
 
 -- speed at which we will move our paddle; multiplied by dt in update
-PADDLE_SPEED = 200
+PADDLE_SPEED = 250
 
 --[[
     Runs when the game first starts up, only once; used to initialize the game.
@@ -90,8 +90,8 @@ function love.load()
 
     -- initialize our player paddles; make them global so that they can be
     -- detected by other functions and modules
-    player1 = Paddle(10, 30, 5, 20)
-    player2 = Paddle(VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 30, 5, 20)
+    player1 = Paddle(10, 30, 5, 40)
+    player2 = Paddle(VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 30, 5, 40)
 
     -- place a ball in the middle of the screen
     ball = Ball(VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4)
@@ -120,6 +120,8 @@ function love.update(dt)
             else
                 ball.dy = math.random(10, 150)
             end
+            -- increase player points by one
+            player1Score = player1Score + 1
         end
         if ball:collides(player2) then
             ball.dx = -ball.dx * 1.03
@@ -128,9 +130,11 @@ function love.update(dt)
             -- keep velocity going in the same direction, but randomize it
             if ball.dy < 0 then
                 ball.dy = -math.random(10, 150)
-            else
+            elseplayer2Score = 0
                 ball.dy = math.random(10, 150)
             end
+            -- increase player points by one
+            player2Score = player2Score + 1
         end
 
         -- detect upper and lower screen boundary collision and reverse if collided
@@ -190,7 +194,8 @@ function love.keypressed(key)
             gameState = 'play'
         else
             gameState = 'start'
-
+            player2Score = 0
+            player1Score = 0
             -- ball's new reset method
             ball:reset()
         end
@@ -207,7 +212,7 @@ function love.draw()
 
     -- clear the screen with a specific color; in this case, a color similar
     -- to some versions of the original Pong
-    love.graphics.clear(40, 45, 52, 255)
+    love.graphics.clear(40/255, 45/255, 52/255, 1)
 
     -- draw different things based on the state of the game
     love.graphics.setFont(smallFont)

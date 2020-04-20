@@ -117,7 +117,7 @@ end
     Keyboard handling, called by LÖVE2D each frame; 
     passes in the key we pressed so we can access.
 ]]
-function love.keypressed(key)
+ function love.keypressed(key)
     -- keys can be accessed by string name
     if key == 'escape' then
         -- function LÖVE gives us to terminate application
@@ -153,7 +153,7 @@ function love.draw()
 
     -- clear the screen with a specific color; in this case, a color similar
     -- to some versions of the original Pong
-    love.graphics.clear(40, 45, 52, 255)
+    love.graphics.clear(40/255, 45/255, 52/255, 1)
 
     -- draw different things based on the state of the game
     love.graphics.setFont(smallFont)
